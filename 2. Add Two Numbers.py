@@ -56,3 +56,26 @@ class Solution(object):
         
 #         return dummy_node.next
                 
+        answer=ListNode(0)
+        head=answer
+        carry=0
+        while l1 and l2:
+            add=l1.val+l2.val+carry
+            carry=1 if add>=10 else 0
+            head.next=ListNode(add%10)
+            head=head.next
+            l1,l2=l1.next,l2.next
+        
+        l=l1 if l1 else l2
+        while l:
+            add=l.val+carry
+            carry=1 if add>=10 else 0
+            head.next=ListNode(add%10)
+            head=head.next
+            l=l.next
+            
+        if carry:
+            head.next=ListNode(1)
+            
+        return answer.next
+            
